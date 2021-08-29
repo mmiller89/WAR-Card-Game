@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Michael Miller - WAR</title>
+    
+
+
+       
+    
+ </head>
+ <Body background="warbackground.jpg"> 
+    
+    <audio controls autoplay loop>
+        <source src="music.mp3" type="audio/ogg">
+      Your browser does not support the audio element.
+      </audio>
+      <center><h1 id="upperdisplay"></h1></center><br><br><center><button type="button" id="standardGame" onclick="gameManager.standardGame()">Standard Game</button><button type="button" onclick="gameManager.speedGame()">Speed Game</button></center>
+        <style>
+            .textp1 {
+                
+                margin-left: 550px;
+                position: absolute;
+    
+            }
+            </style>
+        <style>
+            .textp2 {
+                position: absolute;
+                margin-left: 1200px;
+    
+            }
+            </style>
+        
+        
+     <script src = "W6 Project(Rewrite).js"></script>
+     <script>function updateHTML(playerOne,playerTwo){
+         playerOne.updateScoreP1()
+         playerTwo.updateScoreP2()
+        document.getElementById('p1text').innerHTML = gameManager.leftSideDisplay;
+        document.getElementById('p2text').innerHTML = gameManager.rightSideDisplay;
+        document.getElementById('p1points').innerHTML = "Points: " + gameManager.leftSidePoints;
+        document.getElementById('p2points').innerHTML = "Points: " + gameManager.rightSidePoints;
+        document.getElementById('p1cards').innerHTML = "Cards Available: " + gameManager.leftSideCards;
+        document.getElementById('p2cards').innerHTML = "Cards Available: " + gameManager.rightSideCards;
+        document.getElementById('upperdisplay').innerHTML = "Turns Remaining: " + gameManager.turnAmount;
+        
+    }</script>
+     <br><br><br><br><br><br><br><br><br><br><br><br><br>
+     <h1 id="p1text" class="textp1"></h1><h1 id="p2text" class="textp2"></h1>
+     <br><br><br><br>
+     <h2 id="p1points" class ="textp1"></h2><h2 id="p2points" class ="textp2"></h2>
+     <br><br><br><br>
+     <h2 id="p1cards" class ="textp1"></h2><h2 id="p2cards" class ="textp2"></h2>
+ </body>
+ </html>
