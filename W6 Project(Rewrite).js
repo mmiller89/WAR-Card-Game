@@ -1,3 +1,5 @@
+//GameManager initializes the HTML and other necessary elements.
+
 class GameManager{
     constructor(){
         this.leftSideDisplay = "Player 1"
@@ -13,11 +15,14 @@ class GameManager{
 
     }
 
-
+    //Called when Standard Game is pushed in html file. Used to play a "regular" game (my own interpretation).
     standardGame(){
+        //Ensures that this button is unusable when in a Speed Game.
         if (this.gameInitialized === false){
             alert("Welcome to WAR! Let's shuffle the deck and split the cards.")
             deckHandler.randomizeDeck()
+            //If I don't do length - 1, I will ocassionally get an undefined array value in one of the player decks.
+            //THIS FUNCTION IS COPIED AGAIN BELOW. IS THERE A WAY TO PUT THIS INTO A NEW METHOD TO AVOID IT? See line 98.
             for(let i=0; i <= deckHandler.masterDeck.length - 1; i++){
                 if (i % 2 === 0){
                     playerOne.deckArray.push(deckHandler.masterDeck[i])
@@ -25,7 +30,7 @@ class GameManager{
                     playerTwo.deckArray.push(deckHandler.masterDeck[i])
                 } 
             }
-            
+            //While loop checks if player entered a turn amount between 5 and 99 turns. Choosing the amount of turns is part of my version of the game.
             let goCheck = false
             while (!goCheck){
                 this.turnAmount = parseInt(prompt(`For a standard game, select how many turns you want the game to last. After turns expire, whoever has the most points wins!
@@ -42,6 +47,8 @@ class GameManager{
             this.gameInitialized = true
             this.speedRound = false
 
+
+            //This code runs after the initialization (after you've pressed the button once already)
         } else if (this.gameInitialized === true) {
             if (playerOne.deckAmount > 0 && playerTwo.deckAmount > 0 && this.turnAmount != 0){
                 alert("Player 1 draws a card: " + playerOne.deckArray[0] + "\n" + "Player 2 draws a card: " + playerTwo.deckArray[0])
@@ -83,13 +90,15 @@ class GameManager{
         } 
     }
 
-
+    //Speed Game rapidly draws and displays result in console log. First, check if standard game is in progress. Button does not work when
+    //a standard game is going. 
     speedGame(){
         if(this.speedRound){
             let standardGame = document.getElementById("standardGame");
             standardGame.remove();
             alert("A speed game goes through each set of cards and compares them rapidly. Opponents do not keep winning cards. After the deck is exhausted, points are tallied. Results of each round are in the console log.")
             deckHandler.randomizeDeck()
+            //Repeated function here - need help to avoid copy and paste. 
             for(let i=0; i <= deckHandler.masterDeck.length - 1; i++){
                 if (i % 2 === 0){
                     playerOne.deckArray.push(deckHandler.masterDeck[i])
@@ -115,7 +124,7 @@ class GameManager{
         } else {
             alert("It was a tie!")
         }
-        //Reset both arrays so HTML updates deck amount to 0
+        //Reset both arrays so HTML updates deck amount to 0.
         playerOne.deckArray = [] 
         playerTwo.deckArray = []
         updateHTML(playerOne, playerTwo)
@@ -156,7 +165,8 @@ class DeckHandler{
 
 
 
-
+//Player class - I used extend GameManager to give GameManager to give Player access to GameManager for HTML display, and also for GameManager to have access to player
+//1 and player 2. I'm still struggling with inheritance, though. I feel like this was more blind luck that it worked.
 class Player extends GameManager{
     constructor(deckAmount, points, deckArray){
         super()
@@ -179,7 +189,7 @@ class Player extends GameManager{
 
 }
 
-
+//Initialization of classes at page load.
 let gameManager = new GameManager()
 let playerOne = new Player(0,0,[])
 let playerTwo = new Player(0,0,[])
@@ -187,4 +197,24 @@ let deckHandler = new DeckHandler([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6
 
 
 
+
+
+//This function is the one to be tested by Mocha/Chai.
+
+function randomizeDeckTest(array) {
+
+    var currentIndex = array.length,  randomIndex;
+
+    while (currentIndex != 0) {
+  
+      
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }    
+    return array
+}   
 

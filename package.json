@@ -1,15 +1,15 @@
 {
   "name": "final-project",
   "version": "1.0.0",
-  "description": "Promineo Tech Project",
-  "main": "Week 6 Project.js",
+  "description": "Test Function",
+  "main": "W6 Project(Rewrite).js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "randomizeDeck"
   },
-  "author": "",
+  "author": "Michael Miller",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.3.4",
-    "mocha": "^9.1.0"
+    "mocha": "^9.1.1"
   }
 }
